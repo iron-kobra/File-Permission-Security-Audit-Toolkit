@@ -1,0 +1,7 @@
+---Insecure Permission Report---
+Generated on: Sat Dec  6 16:52:04 IST 2025
+
+---Files with 777 permissions---:
+
+---Directories with 777 permissions---:
+
