@@ -1,0 +1,76 @@
+===== FILE PERMISSION & SECURITY AUDIT REPORT =====
+Generated on: Sat Dec  6 19:23:27 UTC 2025
+
+[1] Insecure Permissions
+---Insecure Permission Report---
+Generated on: Sat Dec  6 18:12:47 UTC 2025
+
+---Files with 777 permissions---:
+../tests/test1.sh
+
+---Directories with 777 permissions---:
+
+
+[2] World-Writable Files
+===== World Writable File Report =====
+Generated on: Sat Dec  6 18:32:16 UTC 2025
+
+--- World-Writable Files (others have write access) ---
+
+--------w- 1 abhi abhi 0 Dec  6 18:27 ../tests/c.txt
+-rw-rw-rw- 1 abhi abhi 0 Dec  6 18:27 ../tests/b.txt
+-rwxrwxrwx 1 abhi abhi 0 Dec  6 18:27 ../tests/a.txt
+-rwxrwxrwx 1 abhi abhi 0 Dec  6 18:12 ../tests/test1.sh
+
+Total files found: 4
+
+[3] Weak Scripts
+Weak script report
+Generated on : Sat Dec  6 18:44:02 UTC 2025
+Directory scanned : ../tests
+------------------------------------------------------
+
+1) Scripts missing SHEBANG LINE
+------------------------------------------------------
+../tests/variable1.sh
+../tests/user1.sh
+../tests/infiniteloop1.sh
+../tests/forloop1.sh
+../tests/header_missing.sh
+../tests/while1.sh
+../tests/connection1.sh
+../tests/string1.sh
+../tests/test1.sh
+
+2) Scripts containing risky Patterns
+------------------------------------------------------
+../tests/sudo.sh contains risky pattern : chmod 777
+
+Weak script scan completed!
+
+[4] Broken Symbolic Links
+No broken links found or module not ready.
+
+[5] Security Recommendations
+===== Security Recommendations =====
+Generated on: Sat Dec  6 19:12:11 UTC 2025
+
+[1] Insecure Permissions Detected
+ - Avoid using chmod 777 on files or directories.
+ - Use chmod 755 for directories and chmod 644 for files.
+ - Restrict write access to owner or trusted groups only.
+
+[2] World-Writable Files Found
+ - Remove write access for 'others' using: chmod o-w <file>
+ - Prevent unauthorized modification by restricting permissions.
+ - Keep shared directory writeable only if absolutely necessary.
+
+[3] Weak Scripts Detected
+ - Add a proper shebang line: #!/bin/bash
+ - Remove dangerous commands like rm -rf, chmod 777, or eval.
+ - Avoid hardcoded passwords in scripts.
+ - Quote variables to prevent word-splitting vulnerabilities.
+
+Recommendations generated successfully.
+
+===== END OF REPORT =====

@@ -1,0 +1,20 @@
+===== Security Recommendations =====
+Generated on: Sat Dec  6 19:12:11 UTC 2025
+
+[1] Insecure Permissions Detected
+ - Avoid using chmod 777 on files or directories.
+ - Use chmod 755 for directories and chmod 644 for files.
+ - Restrict write access to owner or trusted groups only.
+
+[2] World-Writable Files Found
+ - Remove write access for 'others' using: chmod o-w <file>
+ - Prevent unauthorized modification by restricting permissions.
+ - Keep shared directory writeable only if absolutely necessary.
+
+[3] Weak Scripts Detected
+ - Add a proper shebang line: #!/bin/bash
+ - Remove dangerous commands like rm -rf, chmod 777, or eval.
+ - Avoid hardcoded passwords in scripts.
+ - Quote variables to prevent word-splitting vulnerabilities.
+
+Recommendations generated successfully.
