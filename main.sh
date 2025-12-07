@@ -31,7 +31,7 @@ help_menu() {
     echo "  broken-links       Check for broken symbolic links"
     echo "  recommendations    Generate system recommendations"
     echo "  report             Combine all reports into final file"
-    echo "  help               Show help menu"
+    echo "  quit               Quit"
     echo ""
 }
 
@@ -54,11 +54,11 @@ run_module() {
         exit 1
     fi
 }
-
-case "$1" in
-    help|--help)
-        help_menu
-        ;;
+while true 
+do
+help_menu
+read -p "Enter you choice:" choice
+case $choice in
     insecure)
         ensure_directories
         run_module "insecure_permissions"
@@ -69,7 +69,7 @@ case "$1" in
         ;;
     weak-scripts)
         ensure_directories
-        run_module "weak_scripts"
+        run_module "weak_script_detector"
         ;;
     broken-links)
         ensure_directories
@@ -77,23 +77,38 @@ case "$1" in
         ;;
     recommendations)
         ensure_directories
-        run_module "recommendations"
+	run_module "recommendations"
+	while read line 
+	do
+	echo $line
+	done < "$OUTPUT_DIR/recommendations.txt"
         ;;
     report)
         ensure_directories
         run_module "report_generator"
+	while read line
+        do
+        echo $line
+        done < "$OUTPUT_DIR/audit_report.txt"
         ;;
     all)
         ensure_directories
         run_module "insecure_permissions"
         run_module "world_writable"
-        run_module "weak_scripts"
+        run_module "weak_script_detector"
         run_module "broken_links"
         run_module "recommendations"
         run_module "report_generator"
         ;;
+    quit|Quit)
+	echo "thank you for using our toolkit"
+	echo "exiting.."
+	exit 0
+	;;
     *)
         echo -e "${RED}Invalid option.${NC}"
-        help_menu
+    	echo "exiting..."
+	exit 0
         ;;
 esac
+done

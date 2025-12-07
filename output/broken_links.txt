@@ -1,0 +1,17 @@
+=== Broken Link Checker Report ===
+Generated on: Sat Dec  6 20:08:49 UTC 2025
+
+[All Symbolic Links]
+../tests/test_links/valid_link2
+../tests/test_links/valid_link3
+../tests/test_links/broken_link2
+../tests/test_links/broken_link3
+../tests/test_links/valid_link1
+../tests/test_links/broken_link1
+
+[Broken Links]
+../tests/test_links/broken_link2
+../tests/test_links/broken_link3
+../tests/test_links/broken_link1
+
+Total Broken Links: 3
