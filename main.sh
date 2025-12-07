@@ -29,8 +29,8 @@ help_menu() {
     echo "  world-writable     Find world-writable files"
     echo "  weak-scripts       Analyze weak/risky scripts"
     echo "  broken-links       Check for broken symbolic links"
-    echo "  recommendations    Generate system recommendations"
-    echo "  report             Combine all reports into final file"
+    echo "  recommendations    Show system recommendations"
+    echo "  report             Show final Report"
     echo "  quit               Quit"
     echo ""
 }
@@ -38,7 +38,12 @@ help_menu() {
 ensure_directories() {
     mkdir -p "$OUTPUT_DIR"
 }
-
+show_output(){
+ while read line
+ do
+	echo $line
+ done < "$OUTPUT_DIR/$1.txt"
+}
 run_module() {
     script="$MODULE_DIR/$1.sh"
 
@@ -62,34 +67,32 @@ case $choice in
     insecure)
         ensure_directories
         run_module "insecure_permissions"
+	show_output "insecure_permissions"
         ;;
     world-writable)
         ensure_directories
         run_module "world_writable"
+	show_output "world_writable"
         ;;
     weak-scripts)
         ensure_directories
         run_module "weak_script_detector"
+	show_output "weak_script_report"
         ;;
     broken-links)
         ensure_directories
         run_module "broken_links"
+	show_output "broken_links"
         ;;
     recommendations)
         ensure_directories
 	run_module "recommendations"
-	while read line 
-	do
-	echo $line
-	done < "$OUTPUT_DIR/recommendations.txt"
+	show_output "recommendations"
         ;;
     report)
         ensure_directories
         run_module "report_generator"
-	while read line
-        do
-        echo $line
-        done < "$OUTPUT_DIR/audit_report.txt"
+	show_output "audit_report"
         ;;
     all)
         ensure_directories
@@ -99,6 +102,8 @@ case $choice in
         run_module "broken_links"
         run_module "recommendations"
         run_module "report_generator"
+	show_output "recommendations"
+	show_output "audit_report"
         ;;
     quit|Quit)
 	echo "thank you for using our toolkit"

@@ -7,7 +7,7 @@ output_file="../output/weak_script_report.txt"
 
 # Generating the head of the weak script report file
 
-echo "Weak script report" >> "$output_file"
+echo "Weak script report" > "$output_file"
 echo "Generated on : $(date)" >> "$output_file"
 echo "Directory scanned : $scan_directory" >> "$output_file"
 echo "------------------------------------------------------" >> "$output_file"
